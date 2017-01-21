@@ -115,13 +115,23 @@ define(function(require, exports, module) {
 
             // customize file dialog
             fileDialog.on("show", function() {
-                // avoid customizing other file dialogs (e.g., save)
-                if (openingFile !== true)
-                    return;
-
-                // hide "Folder:" label and text field
+                // directory text field
                 var txtDirectory = fileDialog.getElement("txtDirectory");
+
+                // avoid customizing other file dialogs (e.g., save)
+                if (openingFile !== true) {
+                    // show "Folder: " label
+                    show(txtDirectory.previousSibling);
+
+                    // show directory text field
+                    show(txtDirectory);
+                    return;
+                }
+
+                // hide "Folder: " label
                 hide(txtDirectory.previousSibling);
+
+                // hide directory text field
                 hide(txtDirectory);
 
                 // allow opening file by double-clicking it
